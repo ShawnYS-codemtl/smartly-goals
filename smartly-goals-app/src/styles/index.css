@@ -10,7 +10,7 @@ body {
   padding: 0;
 }
 
-h1 {
+#title {
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
   font-size: 2.5rem;
@@ -18,6 +18,15 @@ h1 {
   margin: 0;
   box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.10), 0px 1px 2px 0px rgba(0,0,0,0.06);
   background: white;
+  color:#2563EB;
+  background: linear-gradient(
+  135deg,
+  #FEF3C7 0%,   /* amber-100 (S) */
+  #DCFCE7 25%,  /* green-100 (M) */
+  #E0F2FE 50%,  /* sky-100 (A) */
+  #EDE9FE 75%,  /* violet-100 (R) */
+  #FFE4E6 100%  /* rose-100 (T) */
+);
 }
 
 .hero {
@@ -91,6 +100,64 @@ footer {
   padding: 1em 3em;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
   background: white;
+}
+
+.letters-row {
+  display: flex;
+  gap: 30px;
+  margin: 0 auto;
+  padding: 2em 3em;
+  background: linear-gradient(
+  135deg,
+  #F8FAFC 0%,   /* slate-50 */
+  #EFF6FF 25%,  /* blue-50 */
+  #F0FDF4 100%  /* green-50 */
+);
+}
+
+.letter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  min-width: 180px;
+  max-width: 360px;
+  padding: 1rem 2rem; 
+  border-radius: 30px;
+  margin: 0;
+  color: #334155;
+  border: 2px solid transparent;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.letter-container:hover {
+  transform: translateY(-2px);
+  border-color: #2563EB;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  opacity: 5;
+}
+
+.letter-container:active {
+  transform: translateY(0px) scale(0.98);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.10);
+  border-color: #1D4ED8; /* darker blue for "pressed" feel */
+}
+
+.letter {
+  font-size: 5rem;
+}
+
+.letter-icon {
+  font-size: 4.5rem;
+  color: #475569;
+  margin-bottom: 45px;
+}
+.desc {
+  height: 100px;
+}
+.example {
+  opacity: 0.8;
 }
 
 .primary {
