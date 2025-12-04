@@ -1,5 +1,5 @@
 export const smartInfo = [
-    {
+    {   
         letter: "S",
         adjective: "Specific",
         icon: "fa-bullseye",
