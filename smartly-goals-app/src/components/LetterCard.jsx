@@ -1,8 +1,10 @@
 import React from "react"
+
 export default function LetterCard(props){
     
     const [inputOpen, setInputOpen] = React.useState(false)
     const [text, setText] = React.useState('')
+    const [aiFeedback, setAiFeedback] = React.useState('')
     const textareaRef = React.useRef(null);
 
     const styles = {
@@ -20,8 +22,26 @@ export default function LetterCard(props){
     }
 
     function handleChange(event){
-        const {value, name} = event.currentTarget
-        setText(value)
+        setText(event.target.value)
+    }
+
+    async function verifySection(sectionName, userText, desc) {
+        const res = await fetch("/api/verifySmart", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ section: sectionName, text: userText, desc: desc }),
+        });
+
+        const data = await res.json()
+        return data.result
+    }
+
+    async function handleVerify(e) {
+        e.stopPropagation()
+        e.preventDefault()
+
+        const result = await verifySection(props.letter, text, props.desc);
+        setAiFeedback(result);
     }
 
     return (
@@ -37,24 +57,37 @@ export default function LetterCard(props){
             <i className={`fa-solid letter-icon ${props.icon}`}></i>
             <h2>{props.adjective}</h2>
             <p className="desc">{props.desc}</p>
-            <p className="example">"{props.example}"</p>
+            {(!text || text === "" ) && <p className="example">Example: "{props.example}"</p>}
 
             {props.active === props.letter && inputOpen && 
             (
-            <form action="">
+            <form onClick={(e) => e.stopPropagation()} onSubmit={handleVerify}>
                 <textarea 
                     onClick={(e) => e.stopPropagation()} 
                     ref={textareaRef} 
-                    name="" 
-                    id=""
+                    name="goal" 
+                    id="goal"
+                    placeholder="Write your goal here."
                     value={text}
                     onChange={handleChange}
+                    required
                     ></textarea>
+                <button type="submit"> Verify</button>
             </form>
             )} 
 
             {!inputOpen && text && (
-                <p className="mt-2 text-gray-700">{text}</p>
+                <div className="input-goal-container">
+                    <strong>My Goal:</strong>
+                    <p className="input-goal">{text}</p>
+                </div>
+            )}
+
+            {aiFeedback && (
+                <div className="ai-feedback">
+                    <strong>AI Suggestion:</strong>
+                    <p>{aiFeedback}</p>
+                </div>
             )}
         </div>
     

@@ -112,7 +112,9 @@ footer {
   #F8FAFC 0%,   /* slate-50 */
   #EFF6FF 25%,  /* blue-50 */
   #F0FDF4 100%  /* green-50 */
-);
+  );
+  /* align-items: stretch; */
+
 }
 
 .letter-container {
@@ -129,6 +131,7 @@ footer {
   border: 2px solid transparent;
   transition: all 0.25s ease;
   cursor: pointer;
+  flex: 1;
 }
 
 .letter-container:hover {
@@ -153,11 +156,85 @@ footer {
   color: #475569;
   margin-bottom: 45px;
 }
+
 .desc {
-  height: 100px;
+  min-height: 120px;
 }
+
 .example {
   opacity: 0.8;
+  margin: 0 0 1rem 0;
+}
+
+/* Form wrapper */
+.letter-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* space between textarea and button */
+  margin-top: 12px;
+  /* width: 100%; */
+}
+
+/* Textarea */
+.letter-container textarea {
+  width: 100%;
+  min-height: 80px;      /* minimum height */
+  max-height: none;      /* no maximum */
+  resize: vertical;      /* allow user to expand vertically */
+  padding: 10px 1rem 0 1rem;
+  border: 1px solid #d1d5db; /* light gray border */
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.letter-container textarea:focus {
+  outline: none;
+  border-color: #2563eb; /* blue border */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.letter-container button {
+  align-self: flex-start; /* align left; change to center if desired */
+  padding: 8px 16px;
+  background-color: #2563eb; /* primary blue */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+/* Button hover */
+.letter-container button:hover {
+  background-color: #1d4ed8; /* darker blue */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Button active / click */
+.letter-container button:active {
+  transform: scale(0.97);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* .input-goal-container {
+  margin-top: 10px;
+} */
+
+.ai-feedback {
+  margin-top: 30px;
+}
+
+.input-goal {
+  color: #2563EB;
+}
+
+textarea {
+  min-height: 100px;
 }
 
 .primary {
