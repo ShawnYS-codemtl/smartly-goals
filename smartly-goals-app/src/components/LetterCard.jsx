@@ -4,7 +4,11 @@ export default function LetterCard(props){
     
     const [inputOpen, setInputOpen] = React.useState(false)
     const [text, setText] = React.useState('')
-    const [aiFeedback, setAiFeedback] = React.useState('')
+    const [aiFeedback, setAiFeedback] = React.useState({
+        critique: "",
+        improved: "",
+        justification: ""
+    })
     const textareaRef = React.useRef(null);
 
     const styles = {
@@ -31,7 +35,9 @@ export default function LetterCard(props){
         e.preventDefault()
 
         const result = await props.verifySection(props.letter);
+        console.log(result)
         setAiFeedback(result);
+        console.log(aiFeedback)
     }
 
     return (
@@ -47,6 +53,8 @@ export default function LetterCard(props){
             <i className={`fa-solid letter-icon ${props.icon}`}></i>
             <h2>{props.adjective}</h2>
             <p className="desc">{props.desc}</p>
+            <hr />
+
             {(!text || text === "" ) && <p className="example">Example: "{props.example}"</p>}
 
             {props.active === props.letter && inputOpen && 
@@ -73,10 +81,12 @@ export default function LetterCard(props){
                 </div>
             )}
 
-            {aiFeedback && (
+            {aiFeedback.improved && (
                 <div className="ai-feedback">
                     <strong>AI Suggestion:</strong>
-                    <p>{aiFeedback}</p>
+                    <p>Critique: {aiFeedback.critique}</p>
+                    <p>Improved: {aiFeedback.improved}</p>
+                    <p>Justification: {aiFeedback.justification}</p>
                 </div>
             )}
         </div>

@@ -15,10 +15,22 @@ export default async function handler(req, res) {
       max_tokens: 400,
     })
 
+    // The model returns JSON as string text
     const aiMessage = response.choices[0].message.content
 
-    res.status(200).json({ result: aiMessage })
-    
+    let parsed
+    try {
+      parsed = JSON.parse(aiMessage)  
+    } catch (err) {
+      console.error("JSON parse error:", err)
+      return res.status(500).json({
+        error: "AI returned invalid JSON",
+        raw: aiMessage,
+      })
+    }
+
+    return res.status(200).json(parsed)
+
   } catch (error) {
     console.error("AI ERROR:", error)
     res.status(500).json({ error: "AI request failed" })

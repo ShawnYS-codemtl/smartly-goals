@@ -27,7 +27,13 @@ export default function Goals() {
             Other sections are only for context.
             Provide corrections and suggestions ONLY if needed.
             Keep the feedback short, constructive, and clear.
-            Return ONLY the improved version and a 1-sentence justification.
+            Return ONLY a 1-sentence critique, an improved version and a 1-sentence justification.
+            Return your response ONLY as a JSON object with this structure:
+            {
+            "critique":"string",
+            "improved": "string",
+            "justification": "string"
+            }
 
             SMART criteria:
 
@@ -59,7 +65,7 @@ export default function Goals() {
         });
 
         const data = await res.json()
-        return data.result
+        return data
     }
 
     const smartEls = smartInfo.map((category) => {
