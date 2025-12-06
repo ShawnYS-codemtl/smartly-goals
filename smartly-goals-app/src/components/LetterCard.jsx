@@ -23,24 +23,14 @@ export default function LetterCard(props){
 
     function handleChange(event){
         setText(event.target.value)
-    }
-
-    async function verifySection(sectionName, userText, desc) {
-        const res = await fetch("/api/verifySmart", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ section: sectionName, text: userText, desc: desc }),
-        });
-
-        const data = await res.json()
-        return data.result
+        props.setValue(event.target.value)
     }
 
     async function handleVerify(e) {
         e.stopPropagation()
         e.preventDefault()
 
-        const result = await verifySection(props.letter, text, props.desc);
+        const result = await props.verifySection(props.letter);
         setAiFeedback(result);
     }
 
@@ -68,7 +58,7 @@ export default function LetterCard(props){
                     name="goal" 
                     id="goal"
                     placeholder="Write your goal here."
-                    value={text}
+                    value={props.value}
                     onChange={handleChange}
                     required
                     ></textarea>

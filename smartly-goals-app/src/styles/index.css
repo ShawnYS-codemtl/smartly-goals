@@ -221,9 +221,11 @@ footer {
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-/* .input-goal-container {
-  margin-top: 10px;
-} */
+.input-goal-container {
+  width: 100%;
+  text-align: 100%;
+  margin-top: 20px;
+}
 
 .ai-feedback {
   margin-top: 30px;
