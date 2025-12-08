@@ -1,5 +1,8 @@
 # Smartly Goals
 Interactive web app to create, refine, and export SMART goals with AI assistance.
+https://smartly-goals-app.vercel.app/
+
+<img src="/screenshots/goals-section.png" width="900" />
 
 ## 🚀 Description
 
@@ -77,3 +80,9 @@ Each section can be written, refined, and evaluated with AI-powered suggestions,
 - Enhance AI feedback for more personalized suggestions.
 
 - Add additional export formats (Word, Markdown).
+
+## Screenshots
+
+<img src="/screenshots/edit-ai.png" width="400" />
+<img src="/screenshots/preview.png" width="400" />
+
