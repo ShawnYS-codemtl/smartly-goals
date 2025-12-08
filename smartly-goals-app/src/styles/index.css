@@ -250,3 +250,34 @@ textarea {
 .accent {
   color: #FBBF24;
 }
+
+.goals-container {
+  position: relative;
+}
+
+.preview-pdf-container {
+  position: absolute;
+  bottom: -20px;
+  right: 20px;
+}
+
+.preview-pdf-btn {
+  background-color: #2563EB;  /* blue, matching letter text */
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preview-pdf-btn:hover {
+  background-color: #1D4ED8; /* darker blue on hover */
+}
+
+.preview-pdf-btn:active {
+  transform: scale(0.97);
+}
+

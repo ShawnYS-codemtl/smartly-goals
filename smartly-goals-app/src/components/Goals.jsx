@@ -1,6 +1,7 @@
 import React from "react"
 import LetterCard from "./LetterCard"
 import { smartInfo } from "../data/smartInfo"
+import PdfPreview from "./PdfPreviewModal"
 
 
 export default function Goals() {
@@ -12,6 +13,8 @@ export default function Goals() {
         R:"",
         T:"",
     })
+
+    const [showPreview, setShowPreview] = React.useState(false)
 
     function displayForm(letter){
         setActive(letter)
@@ -85,9 +88,23 @@ export default function Goals() {
         />
     })
     
-    return <div className="letters-row">
-        {smartEls}
-        
-    </div>
+    return (
+            <main className="goals-container">
+            <div className="letters-row">
+                {smartEls}
+                {showPreview && 
+                <PdfPreview
+                goalData={goalSections}
+                onClose={() => setShowPreview(false)}
+                />
+                }
+            </div>
+            <div className="preview-pdf-container">
+                    <button className="preview-pdf-btn" onClick={() => setShowPreview(true)}>
+                        Preview PDF
+                    </button>
+            </div>
+            </main>
+    )
 }
 
