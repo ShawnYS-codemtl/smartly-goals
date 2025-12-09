@@ -11,6 +11,10 @@ export default function LetterCard(props){
     })
     const textareaRef = React.useRef(null);
 
+    React.useEffect(() => {
+        setText(props.value || "")
+    }, [props.value])
+
     const styles = {
         backgroundColor: props.color
     } 

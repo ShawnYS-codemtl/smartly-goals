@@ -16,6 +16,25 @@ export default function Goals() {
 
     const [showPreview, setShowPreview] = React.useState(false)
 
+    const isFirstRender = React.useRef(true)
+
+    React.useEffect(() => {
+        const savedGoals = JSON.parse(localStorage.getItem("smartGoals"))
+        console.log("Loaded goals:", savedGoals);
+        if (savedGoals) {
+            setGoalSections(savedGoals)
+        }
+        }, []);
+
+    React.useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false
+            return    // skipping saving on first render
+        }
+        
+    localStorage.setItem("smartGoals", JSON.stringify(goalSections));
+    }, [goalSections]);
+
     function displayForm(letter){
         setActive(letter)
         console.log(letter)
