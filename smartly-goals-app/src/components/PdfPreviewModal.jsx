@@ -1,7 +1,7 @@
-import React from "react";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
-import "../styles/pdfPreview.css";
+import React from "react"
+import jsPDF from "jspdf"
+import html2canvas from "html2canvas"
+import "../styles/pdfPreview.css"
 
 const SMART_DESCRIPTIONS = {
   S: "Define exactly what you want to accomplish and what needs to happen.",
@@ -9,7 +9,7 @@ const SMART_DESCRIPTIONS = {
   A: "Show why the goal is realistic based on your skills, resources, and situation.",
   R: "Clarify why this goal matters and how it connects to your priorities.",
   T: "Set a clear deadline or timeframe to create structure and urgency.",
-};
+}
 
 const SMART_ICONS = {
   S: "fa-bullseye",
@@ -17,51 +17,55 @@ const SMART_ICONS = {
   A: "fa-medal",
   R: "fa-circle-nodes",
   T: "fa-clock",
-};
+}
 
 export default function PdfPreview({ goalData, onClose }) {
-  const pdfRef = React.useRef(null);
+  const pdfRef = React.useRef(null)
 
-  if (!goalData) return null;
+  if (!goalData) return null
 
   const handleDownload = async () => {
-    const element = pdfRef.current;
+    const element = pdfRef.current
 
     // Capture the element using html2canvas
-    const canvas = await html2canvas(element, { scale: 2, useCORS: true });
-    const imgData = canvas.toDataURL("image/png");
+    const canvas = await html2canvas(element, 
+        { 
+            scale: 2, 
+            useCORS: true,
+            ignoreElements: (el) => { return el.classList.contains('pdf-buttons')}
+         })
+    const imgData = canvas.toDataURL("image/png")
 
     // Create a jsPDF instance
     const pdf = new jsPDF({
       unit: "mm",
       format: "a4",
       orientation: "portrait",
-    });
+    })
 
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
+    const pageWidth = pdf.internal.pageSize.getWidth()
+    const pageHeight = pdf.internal.pageSize.getHeight()
 
-    // Calculate height to maintain aspect ratio
-    const imgProps = pdf.getImageProperties(imgData);
-    const pdfHeight = (imgProps.height * pageWidth) / imgProps.width;
+    const imgWidth = pageWidth
+    const imgHeight = (canvas.height * imgWidth) / canvas.width
 
-    let heightLeft = pdfHeight;
-    let position = 0;
+    let heightLeft = imgHeight
+    let position = 0
 
     // Add first page
-    pdf.addImage(imgData, "PNG", 0, position, pageWidth, pdfHeight);
-    heightLeft -= pageHeight;
+    pdf.addImage(imgData, "PNG", 0, position, pageWidth, imgHeight)
+    heightLeft -= pageHeight
 
     // Add more pages if content is taller than one page
     while (heightLeft > 0) {
-      position = heightLeft - pdfHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, "PNG", 0, position, pageWidth, pdfHeight);
-      heightLeft -= pageHeight;
+      position = heightLeft - imgHeight
+      pdf.addPage()
+      pdf.addImage(imgData, "PNG", 0, position, pageWidth, imgHeight)
+      heightLeft -= pageHeight
     }
 
-    pdf.save("SmartGoal.pdf");
-  };
+    pdf.save("SmartGoal.pdf")
+  }
 
   return (
     <div className="pdf-overlay">
@@ -99,6 +103,6 @@ export default function PdfPreview({ goalData, onClose }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
