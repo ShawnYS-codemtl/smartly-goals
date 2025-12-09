@@ -9,7 +9,7 @@ export default function LetterCard(props){
         improved: "",
         justification: ""
     })
-    const textareaRef = React.useRef(null);
+    const textareaRef = React.useRef(null)
 
     React.useEffect(() => {
         setText(props.value || "")
@@ -21,9 +21,9 @@ export default function LetterCard(props){
 
     React.useEffect(() => {
     if (inputOpen && textareaRef.current) {
-      textareaRef.current.focus();
+      textareaRef.current.focus()
     }
-    }, [inputOpen]);
+    }, [inputOpen])
 
     function toggleInput(){
         setInputOpen(prev => !prev)
@@ -38,9 +38,9 @@ export default function LetterCard(props){
         e.stopPropagation()
         e.preventDefault()
 
-        const result = await props.verifySection(props.letter);
+        const result = await props.verifySection(props.letter)
         console.log(result)
-        setAiFeedback(result);
+        setAiFeedback(result)
         console.log(aiFeedback)
     }
 

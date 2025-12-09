@@ -20,11 +20,11 @@ export default function Goals() {
 
     React.useEffect(() => {
         const savedGoals = JSON.parse(localStorage.getItem("smartGoals"))
-        console.log("Loaded goals:", savedGoals);
+        console.log("Loaded goals:", savedGoals)
         if (savedGoals) {
             setGoalSections(savedGoals)
         }
-        }, []);
+        }, [])
 
     React.useEffect(() => {
         if (isFirstRender.current) {
@@ -32,8 +32,8 @@ export default function Goals() {
             return    // skipping saving on first render
         }
         
-    localStorage.setItem("smartGoals", JSON.stringify(goalSections));
-    }, [goalSections]);
+    localStorage.setItem("smartGoals", JSON.stringify(goalSections))
+    }, [goalSections])
 
     function displayForm(letter){
         setActive(letter)
@@ -71,7 +71,7 @@ export default function Goals() {
 
         Object.entries(goalSections).forEach(([letter, text]) => {
             if (text && letter !== currentSection) {
-            messages.push({ role: "user", content: `Section ${letter}: "${text}"` });
+            messages.push({ role: "user", content: `Section ${letter}: "${text}"` })
             }
         })
 
@@ -84,7 +84,7 @@ export default function Goals() {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({messages}),
-        });
+        })
 
         const data = await res.json()
         return data
