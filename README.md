@@ -71,7 +71,7 @@ Each section can be written, refined, and evaluated with AI-powered suggestions,
 
 - Exclude buttons from pdf
 
-- Save answers to LocalStorage
+- Save answers to LocalStorage (done)
 
 - Add user authentication and goal history tracking.
 
